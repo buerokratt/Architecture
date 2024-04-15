@@ -39,10 +39,11 @@ sequenceDiagram
 
   autonumber
   Client->>+Widget: Hello
-  Widget->>+Ruuter: Hello
+  Widget->>Ruuter: Hello
   Ruuter->>+Rasa: Hello
   Rasa-->>-Ruuter: Hello. How can I help you?
   Ruuter->>RelationalDB: How can I help you?
+  Ruuter->>NoSQL: *There are new messages for Chat ID XYZ*
 
   loop Continuously fetch for new messages
     loop Check for new message notifications
@@ -53,7 +54,7 @@ sequenceDiagram
       SSE->>Widget: *There are new messages for Chat ID XYZ*
     end
 
-    Widget->>Ruuter: *Send new messages for Chat ID XYZ*
+    Widget->>+Ruuter: *Send new messages for Chat ID XYZ*
     Ruuter->>+Resql: *Send new messages for Chat ID XYZ*
     Resql->>+RelationalDB: *Send new messages for Chat ID XYZ*
     RelationalDB-->>-Resql: How can I help you?
@@ -83,7 +84,7 @@ sequenceDiagram
 
   autonumber
   Client->>+Widget: Who wrote the book "Kevade"?
-  Widget->>+Ruuter: Who wrote the book "Kevade"?
+  Widget->>Ruuter: Who wrote the book "Kevade"?
   Ruuter->>+Rasa: Who wrote the book "Kevade"?
   Rasa-->>-Ruuter: *No response*
 
@@ -95,6 +96,7 @@ sequenceDiagram
   note over Ruuter,RelationalDB: Ruuter now again uses sensitive information in next steps due to making them again only in secure, trusted environment
 
   Ruuter->>RelationalDB: The book Kevade was written by an Estonian writer Oskar Luts
+  Ruuter->>NoSQL: *There are new messages for Chat ID XYZ*
 
   loop Continuously fetch for new messages
     loop Check for new message notifications
@@ -105,7 +107,7 @@ sequenceDiagram
       SSE->>Widget: *There are new messages for Chat ID XYZ*
     end
 
-    Widget->>Ruuter: *Send new messages for Chat ID XYZ*
+    Widget->>+Ruuter: *Send new messages for Chat ID XYZ*
     Ruuter->>+Resql: *Send new messages for Chat ID XYZ*
     Resql->>+RelationalDB: *Send new messages for Chat ID XYZ*
     RelationalDB-->>-Resql: The book Kevade was written by an Estonian writer Oskar Luts
