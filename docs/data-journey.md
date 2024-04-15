@@ -61,7 +61,7 @@ sequenceDiagram
     Ruuter-->>-Widget: How can I help you?
   end
   
-  Widget-->>-Client: The book Kevade was written by an Estonian writer Oskar Luts
+  Widget-->>-Client: How can I help you?
 ```
 
 #### Use case nr 2 - End Client gets their response from and External source
