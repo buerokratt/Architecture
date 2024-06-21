@@ -24,7 +24,7 @@ Client ->>+ Widget: "Who are the board members of Company ABC123?"
         Rasa -->>- Ruuter: ":service_company_board_members"
 
         loop Find matching endpoint for intent
-            Ruuter -> Ruuter: ":service_company_board_members"
+            note over Ruuter: Internal intent and service mapping
             Ruuter --> Ruuter: "/company/board/members"
         end
 
