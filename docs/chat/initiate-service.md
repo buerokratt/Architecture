@@ -7,7 +7,7 @@ sequenceDiagram
 
 participant Request
 participant Ruuter as Business Logic
-participant NLP
+participant NLU
 participant Database
 participant Formatting
 participant Service
@@ -15,8 +15,8 @@ participant Service
 note over Request, Ruuter: Start processing the request
 Request ->>+ Ruuter: "What's the weather like in Tallinn?"
     loop Detect request's intent
-        Ruuter ->>+ NLP: "What's the weather like in Tallinn?"
-        NLP -->>- Ruuter: {"service": "weather"}
+        Ruuter ->>+ NLU: "What's the weather like in Tallinn?"
+        NLU -->>- Ruuter: {"service": "weather"}
 
         note over Ruuter, Database: Verify if detected Service is active and OK to be served
 
@@ -26,17 +26,17 @@ Request ->>+ Ruuter: "What's the weather like in Tallinn?"
 
     note over Ruuter: Only proceed in case of "HTTP 200"
 
-    loop Detect required NLP input from the request
+    loop Detect required NLU input from the request
         note over Ruuter: {"mandatory": "location", "optional": "time"}
         
-        note over Ruuter: Detect all required variables for the Service based on NLP request
+        note over Ruuter: Detect all required variables for the Service based on NLU request
 
         loop 
-            Ruuter ->>+ NLP: "What's the weather like in Tallinn?"
-            NLP -->>- Ruuter: {"location": "Tallinn"}
+            Ruuter ->>+ NLU: "What's the weather like in Tallinn?"
+            NLU -->>- Ruuter: {"location": "Tallinn"}
 
-            Ruuter ->>+ NLP: "What's the weather like in Tallinn?"
-            NLP -->>- Ruuter: {"time": "N/A"}
+            Ruuter ->>+ NLU: "What's the weather like in Tallinn?"
+            NLU -->>- Ruuter: {"time": "N/A"}
         end
     end
 
