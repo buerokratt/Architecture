@@ -16,11 +16,11 @@ note over Request, Ruuter: Start processing the request
 Request ->>+ Ruuter: "What's the weather like in Tallinn?"
     loop Detect request's intent
         Ruuter ->>+ NLP: "What's the weather like in Tallinn?"
-        NLP -->>- Ruuter: {"Service": "weather"}
+        NLP -->>- Ruuter: {"service": "weather"}
 
         note over Ruuter, Database: Verify if detected Service is active and OK to be served
 
-        Ruuter ->>+ Database: {"Service": "weather"}
+        Ruuter ->>+ Database: {"service": "weather"}
         Database -->>- Ruuter: HTTP 200
     end
 
